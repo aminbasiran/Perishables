@@ -1,10 +1,20 @@
 import product from "../../schema/productsSchema.js"
 
 
-
-const createProductServices = async (item,description,expiryDate) => {
+const getAllProductsServices = async (id) => {
     try {
-        const productRegisteredInDatabase = await product.create({item,description,expiryDate})
+        const allProductsRetrievedFromDatabase = await product.find({ownerID: id})
+        return allProductsRetrievedFromDatabase
+    } 
+    
+    catch (error) {
+        throw new Error("Products retrieval failed", error)
+    }
+}
+
+const createProductServices = async (item,description,expiryDate,ownerID) => {
+    try {
+        const productRegisteredInDatabase = await product.create({item,description,expiryDate,ownerID})
         return productRegisteredInDatabase
     } 
     
@@ -12,20 +22,6 @@ const createProductServices = async (item,description,expiryDate) => {
     catch (error) {
         throw new Error("Product creation failed", error)
     } 
-}
-
-
-
-
-const getAllProductsServices = async () => {
-    try {
-        const allProductsRetrievedFromDatabase = await product.find()
-        return allProductsRetrievedFromDatabase
-    } 
-    
-    catch (error) {
-        throw new Error("Products retrieval failed", error)
-    }
 }
 
 

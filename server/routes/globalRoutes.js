@@ -8,4 +8,4 @@ export const globalRoutes = express.Router()
 
 
 globalRoutes.use("/auth", userRoutes)
-globalRoutes.use("/products", productsRoutes)
+globalRoutes.use("/products", checkIfAuthenticated,productsRoutes)

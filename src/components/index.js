@@ -1,6 +1,6 @@
 export * from "./TopButton"
 export * from "./Filter"
-export * from "./ItemGrid"
+export * from "./ItemList"
 export * from "./Item"
 export * from "./AddItem"
 export * from "./Button"

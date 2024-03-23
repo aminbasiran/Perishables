@@ -3,10 +3,10 @@ import { createProductServices,getAllProductsServices,deleteProductServices,upda
 
 export const getProducts = async (req,res) => {
     
-    // const {uid} = req.user
+    const {uid} = req.user
     
     try {
-        const allProducts = await getAllProductsServices()
+        const allProducts = await getAllProductsServices(uid)
         res.status(201).send({
             status: "Successfull",
             data : {
@@ -32,7 +32,7 @@ export const getProducts = async (req,res) => {
 
 export const createProduct = async (req,res) => {
     const {item,description,expiryDate} = req.body
-    // const {uid} = req.user
+    const {uid} = req.user
 
     try {
         if(!item){
@@ -45,7 +45,7 @@ export const createProduct = async (req,res) => {
             throw new Error("No date provided")
         }
 
-        const createdProduct = await createProductServices(item,description,expiryDate)
+        const createdProduct = await createProductServices(item,description,expiryDate,uid)
         res.status(201).send({
             status: "Successfull",
             data : {

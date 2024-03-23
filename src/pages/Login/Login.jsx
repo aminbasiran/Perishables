@@ -1,12 +1,13 @@
 import React,{useState} from 'react'
 import { Link,useOutletContext,useNavigate} from 'react-router-dom'
 import { auth } from '../../config/firebaseConfig'
-import { useInput } from '../../hooks/useInput'
+import { useInput } from '../../hooks/useForm'
 import { Button } from '../../components'
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
 
+  const {handleLoginWithFirebase} = useOutletContext()
   const navigate = useNavigate()
 
   const email = useInput("")
@@ -16,8 +17,7 @@ const Login = () => {
       e.preventDefault()  
 
       try {
-          const userCredential = await signInWithEmailAndPassword(auth,email.value,password.value) 
-          console.log()
+          await handleLoginWithFirebase(auth,email.value,password.value) 
           navigate("/home")
       } 
       

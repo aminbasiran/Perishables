@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useInput } from '../../hooks/useForm'
 import { Button } from '../../components'
-import axios from 'axios'
+import { useOutletContext } from 'react-router-dom'
 
 const Register = () => {
 
@@ -12,28 +12,13 @@ const Register = () => {
   const password  = useInput("")
   const confirmPassword  = useInput("")
 
-  const handleRegister =  async (e) => {
+  const {handleRegisterWithFirebase} = useOutletContext()
+
+  const handleRegister = (e) => {
     e.preventDefault();
 
-    const url = "http://localhost:3000/api/v1/auth/register";  
-
     try {
-
-        if(password.value !== confirmPassword.value){
-          throw new Error("Password does not match")
-        }
-
-        const requestBody = {
-          firstname: fname.value,
-          lastname: lname.value,
-          email: email.value,
-          password: password.value,
-          confirmPassword: confirmPassword.value,
-        };
-
-        const userCredential = await axios.post(url,requestBody)
-        const user = userCredential.data.data.response
-        console.log(user)
+      handleRegisterWithFirebase(fname.value, lname.value, email.value, password.value, confirmPassword.value)
     } 
     
     catch (error) {

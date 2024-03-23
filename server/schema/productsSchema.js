@@ -1,9 +1,10 @@
 import mongoose from "mongoose"
 
 const productSchema = mongoose.Schema({
+    ownerID : {type:String,required:true},
     item: {type:String,required:true}, 
     description: {type:String,required:true},
-    expiryDate: {type:String,required:true},
+    expiryDate: {type:Date,required:true},
 },{timestamps:true})
 
 
