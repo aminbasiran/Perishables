@@ -9,7 +9,7 @@ export const useAuthListener = (auth, handleCurrentUser) => {
             console.log('User account was just created (registered).');
             } else {
             handleCurrentUser(user);
-            console.log("a user has signed in", user);
+            console.log("a user has signed in");
             }
         } else {
             handleCurrentUser(null);

@@ -9,8 +9,6 @@ import './App.css'
 function App() {
     const [user,setUser] = useState(null)
 
-    
-    
     const handleRegisterWithFirebase = async (fname,lname,email,password,confirmPassword) => {
       const url = "http://localhost:3000/api/v1/auth/register"; 
       
