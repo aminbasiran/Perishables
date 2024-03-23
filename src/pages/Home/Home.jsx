@@ -6,45 +6,60 @@ import { auth } from '../../config/firebaseConfig'
 
 
 const Home = () => {
-    const { isAddItem } = useOutletContext();
-    const [products, setProducts] = useState([]);
 
-    const handleAddProduct = (product) => {
-        setProducts(prevProducts => [...prevProducts, product]);
-    };
+    useEffect(()=>{
+        const fetchAllProducts = async() => {
 
-    const handleDeleteProduct = (id) => {
-        setProducts(prevProducts => prevProducts.filter(product => product._id !== id));
-    };
+            const response = await axios.get("http://localhost:3000/api/v1/products")
+            handleGetProduct(response.data.data.result)
+        }
+        fetchAllProducts()
 
-    useEffect(() => {
-        const fetchAllProducts = async () => {
-            try {
-                const token = await auth.currentUser.getIdToken();
-                if (!token) {
-                    throw new Error("No auth token");
-                }
+    })
 
-                const response = await axios.get("http://localhost:3000/api/v1/products", {
-                    headers: { authorization: `Bearer ${token}` }
-                });
+    const [products,setProducts] = useState([])
 
-                setProducts(response.data.data.response);
-            } catch (error) {
-                console.error('Error fetching products:', error);
-                // Handle error as needed
-            }
-        };
+    const handleDeleteProduct = async (id) => {
+        const response = await axios.delete(`http://localhost:3000/api/v1/products/delete/${id}`)
+        const deletedProduct = response.data.data.result
+        const newProductsAfterDeletion = products.filter(product => product._id !== deletedProduct._id )
+        setProducts(newProductsAfterDeletion)
+    }
 
-        fetchAllProducts();
-    }, []);
+
+    const handleCreateProduct = async(item,description,expiryDate) => {
+
+        const requestBody = {
+            item : item,
+            description : description,
+            expiryDate : expiryDate 
+        }
+
+
+        const response = await axios.post(`http://localhost:3000/api/v1/products/create`,requestBody)
+        const createdProduct = response.data.data.result
+        setProducts(prev => [...prev,createdProduct])
+    }
+
+
+    const handleEditProduct = () => {
+
+    }
+
+    const handleGetProduct = (all) => {
+        setProducts(all)
+    }
+
+
+
+
 
     return (
         <div className='flex flex-col gap-4 w-full'>
-            <TopButton />
-            <Filter />
-            <ItemGrid products={products} handleDeleteProduct={handleDeleteProduct} />
-            {isAddItem && <AddItem handleAddProduct={handleAddProduct} />}
+            <TopButton/>
+            <Filter/>
+            <ItemGrid products={products} handleDeleteProduct={handleDeleteProduct} handleCreateProduct={handleCreateProduct}/>
+            
         </div>
     );
 };

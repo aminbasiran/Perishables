@@ -1,18 +1,17 @@
-import { createProductServices,getAllProductsServices,deleteProductServices } from "../../services/productServices/productServices.js"
+import { createProductServices,getAllProductsServices,deleteProductServices,updateProductServices } from "../../services/productServices/productServices.js"
 
 
-const getProducts = async (req,res) => {
+export const getProducts = async (req,res) => {
     
-    const {uid} = req.user
+    // const {uid} = req.user
     
     try {
-        const allProducts = await getAllProductsServices(uid)
-        console.log(allProducts)
+        const allProducts = await getAllProductsServices()
         res.status(201).send({
             status: "Successfull",
             data : {
                 message : "All products has been successfully retrieved",
-                response : allProducts
+                result : allProducts
             }
         })
     } 
@@ -31,9 +30,9 @@ const getProducts = async (req,res) => {
 
 
 
-const createProduct = async (req,res) => {
+export const createProduct = async (req,res) => {
     const {item,description,expiryDate} = req.body
-    const {uid} = req.user
+    // const {uid} = req.user
 
     try {
         if(!item){
@@ -46,12 +45,12 @@ const createProduct = async (req,res) => {
             throw new Error("No date provided")
         }
 
-        const createdProduct = await createProductServices(item,description,expiryDate,uid)
+        const createdProduct = await createProductServices(item,description,expiryDate)
         res.status(201).send({
             status: "Successfull",
             data : {
                 message : "product has been successfully created",
-                response : createdProduct
+                result : createdProduct
             }
         })
 
@@ -69,7 +68,7 @@ const createProduct = async (req,res) => {
     }}
 
 
-const deleteProduct = async (req,res) => {
+export const deleteProduct = async (req,res) => {
     
     const {productID} = req.params
 
@@ -78,8 +77,8 @@ const deleteProduct = async (req,res) => {
         res.status(202).send({
             status: "Successfull",
             data : {
-                message : "product has been successfully deleted",
-                response : deleted
+                message : "Product has been successfully deleted",
+                result : deleted
             }
         })
 
@@ -96,4 +95,30 @@ const deleteProduct = async (req,res) => {
         })
     }}
 
-export {createProduct,getProducts,deleteProduct}
+
+export const updateProduct = async (req,res) => {
+    const {item,description} = req.body
+    const {productID} = req.params
+
+    try {
+        const updated = await updateProductServices(productID,item,description)
+        res.status(202).send({
+            status: "Successfull",
+            data : {
+                message : "Product has been successfully updated",
+                result : updated
+            }
+        })
+
+    } 
+    
+    
+    
+    catch (error) {
+        res.status(error?.status || 500).send({
+            status: "Unsuccessfull",
+            data : {
+                error : error?.message || error
+            } 
+        })
+    }}

@@ -33,10 +33,15 @@ const router = createBrowserRouter([
       {
         index:true,
         path: "/home",
-        element:  <RequireAuth>
-                    <Home />
-                  </RequireAuth>
+        element:<Home />
       },
+      // {
+      //   index:true,
+      //   path: "/home",
+      //   element:  <RequireAuth>
+      //               <Home />
+      //             </RequireAuth>
+      // },
     ],
   },
 ]);

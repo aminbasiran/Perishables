@@ -2,9 +2,9 @@ import product from "../../schema/productsSchema.js"
 
 
 
-const createProductServices = async (item,description,expiryDate,ownerID) => {
+const createProductServices = async (item,description,expiryDate) => {
     try {
-        const productRegisteredInDatabase = await product.create({item,description,expiryDate,ownerID})
+        const productRegisteredInDatabase = await product.create({item,description,expiryDate})
         return productRegisteredInDatabase
     } 
     
@@ -17,9 +17,9 @@ const createProductServices = async (item,description,expiryDate,ownerID) => {
 
 
 
-const getAllProductsServices = async (ownerID) => {
+const getAllProductsServices = async () => {
     try {
-        const allProductsRetrievedFromDatabase = await product.find({ownerID})
+        const allProductsRetrievedFromDatabase = await product.find()
         return allProductsRetrievedFromDatabase
     } 
     
@@ -41,5 +41,17 @@ const deleteProductServices = async (productID) => {
     }
 }
 
+const updateProductServices = async (productID,item,description) => {
+    try {
+        const updateOneFromDatabase = await product.findOneAndUpdate({ _id: productID},{ $set: { item: item,description:description }},{new:true})
+        return updateOneFromDatabase
+    } 
+    
+    
+    catch (error) {
+        throw new Error("Product deletion failed", error)
+    }
+}
 
-export {createProductServices,getAllProductsServices,deleteProductServices}
+
+export {createProductServices,getAllProductsServices,deleteProductServices,updateProductServices}

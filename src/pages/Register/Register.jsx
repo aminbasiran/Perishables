@@ -1,16 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useFormInput } from '../../hooks/useFormInput'
+import { useInput } from '../../hooks/useForm'
 import { Button } from '../../components'
 import axios from 'axios'
 
 const Register = () => {
 
-  const fname  = useFormInput("")
-  const lname  = useFormInput("")
-  const email  = useFormInput("")
-  const password  = useFormInput("")
-  const confirmPassword  = useFormInput("")
+  const fname  = useInput("")
+  const lname  = useInput("")
+  const email  = useInput("")
+  const password  = useInput("")
+  const confirmPassword  = useInput("")
 
   const handleRegister =  async (e) => {
     e.preventDefault();

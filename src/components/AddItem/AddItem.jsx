@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useOutletContext} from 'react-router-dom'
 import { Button } from '../index'
-import { useFormInput } from '../../hooks/useFormInput'
+import { useInput } from '../../hooks/useForm'
 import { auth } from '../../config/firebaseConfig'
 import axios from 'axios'
 import { parseISO, format} from 'date-fns';
@@ -9,12 +9,10 @@ import { parseISO, format} from 'date-fns';
 
 export const AddItem = ({handleAddProduct}) => {
 
-    const {openModal} = useOutletContext()
-
-    const item = useFormInput("")
-    const description = useFormInput("")
-    const expiryDate = useFormInput("")
-    // const file = useFormInput(undefined)
+    const item = useInput("")
+    const description = useInput("")
+    const expiryDate = useInput("")
+    // const file = useInput(undefined)
 
 
     const handleSubmit = async (e) => {
@@ -63,7 +61,6 @@ export const AddItem = ({handleAddProduct}) => {
             item.handleReset()
             description.handleReset()
             expiryDate.handleReset()
-            openModal()
         }
 
 
@@ -101,7 +98,7 @@ export const AddItem = ({handleAddProduct}) => {
                         </div> */}
                     </div>
                     <div className='flex gap-4 justify-center'>
-                        <Button onclick={openModal} classname="text-black">Cancel</Button>
+                        <Button  classname="text-black">Cancel</Button>
                         <Button type="submit" variant="primary">Add item</Button>
                     </div>
                 </form>

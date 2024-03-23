@@ -1,17 +1,16 @@
 import React,{useState} from 'react'
 import { Link,useOutletContext,useNavigate} from 'react-router-dom'
 import { auth } from '../../config/firebaseConfig'
-import { useFormInput } from '../../hooks/useFormInput'
+import { useInput } from '../../hooks/useInput'
 import { Button } from '../../components'
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
 
   const navigate = useNavigate()
-  const {handleCurrentUser} = useOutletContext()
 
-  const email = useFormInput("")
-  const password = useFormInput("")
+  const email = useInput("")
+  const password = useInput("")
 
   const handleLogin = async(e) => {
       e.preventDefault()  

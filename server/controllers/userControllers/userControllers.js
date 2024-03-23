@@ -30,7 +30,7 @@ const registerUser = async (req,res) => {
             status: "Successfull",
             data : {
                 message : "User has been successfully created",
-                response : registeredUser
+                result : registeredUser
             }
         })
         

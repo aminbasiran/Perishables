@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-export const  useFormInput = (initialvalue)=>{
+export const  useInput = (initialvalue)=>{
 
     const [value,setValue] = useState(initialvalue)
 

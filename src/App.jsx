@@ -7,36 +7,10 @@ import './App.css'
 
 function App() {
 
-    const [currentUser, setCurrentUser] = useState(null)
-    const [isAddItem, setIsAddItem] = useState(false)
-
-    
-    
-    
-    const openModal = () => {
-      setIsAddItem(prev => !prev)
-    }
-    
-    const handleCurrentUser = (currentUser) => {
-      setCurrentUser(currentUser)
-    }
-   
-
-    useAuthListener(auth,handleCurrentUser)
-
-    const value = {
-      openModal,
-      isAddItem,
-      handleCurrentUser,
-      currentUser,
-    }
-
-
-
   return (
     <div>
       <Suspense>
-        <Outlet context={value}/>
+        <Outlet/>
       </Suspense>
     </div>
   )
