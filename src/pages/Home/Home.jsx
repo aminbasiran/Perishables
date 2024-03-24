@@ -54,17 +54,47 @@ const Home = () => {
     }
 
 
-    const handleCreateProduct = async(item,description,expiryDate) => {
-        const requestBody = {
-            item : item,
-            description : description,
-            expiryDate : expiryDate 
+    const handleCreateProduct = async(item,description,expiryDate,file) => {
+
+        if (!item){
+            alert("Please insert product name")
+            return
         }
+
+        if (!description){
+            alert("Please insert description of the product")
+            return
+        }
+
+        if (!expiryDate){
+            alert("Please insert expiry date")
+            return
+        }
+
+        if (!file) {
+            alert('Please select a file.');
+            return;
+        }
+
+
+        // const requestBody = {
+        //     item : item,
+        //     description : description,
+        //     expiryDate : expiryDate,
+        // }
+
+        const formData = new FormData()
+        formData.append('item', item);
+        formData.append('description', description);
+        formData.append('expiryDate', expiryDate);
+        formData.append('file', file);
+
 
         const token = await auth.currentUser.getIdToken();
 
-        const response = await axios.post(`http://localhost:3000/api/v1/products/create`,requestBody,{headers : {
-            authorization : `Bearer ${token}`
+        const response = await axios.post(`http://localhost:3000/api/v1/products/create`,formData,{headers : {
+            "authorization" : `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
         }})
         const createdProduct = response.data.data.result
         setProducts(prev => [...prev,createdProduct])

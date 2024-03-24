@@ -30,6 +30,7 @@ export const AddItem = ({handleAddProduct}) => {
 
         try {
             const token = await auth.currentUser.getIdToken()
+            console.log(token)
 
             if(!token){
                 throw new Error("No auth token")
