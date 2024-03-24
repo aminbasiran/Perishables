@@ -1,5 +1,5 @@
 import React , {useState,useEffect} from 'react'
-import {TopButton,Filter,ItemList,AddItem,Button} from '../../components/index'
+import {TopButton,Filter,ItemList,AddItem,Button,Footer} from '../../components/'
 import axios from 'axios'
 import { auth } from '../../config/firebaseConfig'
 import { isWithinInterval, subDays } from "date-fns"
@@ -77,12 +77,6 @@ const Home = () => {
         }
 
 
-        // const requestBody = {
-        //     item : item,
-        //     description : description,
-        //     expiryDate : expiryDate,
-        // }
-
         const formData = new FormData()
         formData.append('item', item);
         formData.append('description', description);
@@ -106,10 +100,10 @@ const Home = () => {
     }
 
     return (
-        <div className='flex flex-col gap-4 w-full'>
-            <TopButton/>
-            <Filter setIsFilter={setIsFilter}/>
-            <ItemList products={filteredProducts} handleDeleteProduct={handleDeleteProduct} handleCreateProduct={handleCreateProduct}/>
+        <div className='flex flex-col gap-4 w-full h-full'>
+                {/* <TopButton/> */}
+                <Filter setIsFilter={setIsFilter}/>
+                <ItemList products={filteredProducts} handleDeleteProduct={handleDeleteProduct} handleCreateProduct={handleCreateProduct}/>
         </div>
     );
 };

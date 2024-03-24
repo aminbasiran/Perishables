@@ -12,9 +12,9 @@ const getAllProductsServices = async (id) => {
     }
 }
 
-const createProductServices = async (item,description,expiryDate,ownerID) => {
+const createProductServices = async (item,description,expiryDate,ownerID,path) => {
     try {
-        const productRegisteredInDatabase = await product.create({item,description,expiryDate,ownerID})
+        const productRegisteredInDatabase = await product.create({item,description,expiryDate,ownerID,path})
         return productRegisteredInDatabase
     } 
     

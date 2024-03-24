@@ -60,7 +60,7 @@ function App() {
     
     
     return (
-      <div>
+      <div className='w-full h-full'>
         <Suspense>
           <Outlet context={value}/>
         </Suspense>

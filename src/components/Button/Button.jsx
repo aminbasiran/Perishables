@@ -13,9 +13,10 @@ export const Button = ({children, classname, variant, onclick, type, ...props}) 
 const buttonVariants = cva("px-2 py-1 cursor-pointer text-xs text-white font-semibold cursor-pointer rounded-md",{
     variants: {
         variant : {
-            primary : " bg-black text-white ",
+            primary : " bg-black",
             secondary : "bg-gray-500 text-black",
-            green: "bg-green-400"
+            green: "bg-green-400",
+            red: "bg-red-500"
         }
     },
     defaultVariants : {

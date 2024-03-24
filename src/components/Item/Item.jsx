@@ -1,19 +1,11 @@
 import React from 'react'
 import { HiDotsVertical } from "react-icons/hi";
-import { GiTrashCan } from "react-icons/gi";
-import { MdModeEdit } from "react-icons/md";
-import axios from 'axios';
-import { auth } from '../../config/firebaseConfig';
-
 
 export const Item = ({product,handleDeleteProduct}) => {
-
-    
-
     return (
-            <div className='rounded-md bg-black drop-shadow-lg flex flex-row p-2 gap-2 h-20'>
-                <div className='bg-white w-16 rounded-md'>
-                    
+            <div className='rounded-md bg-black drop-shadow-lg flex flex-row p-2 gap-2 h-24'>
+                <div className='h-full'>
+                    <img className="h-full rounded-lg object-cover" src={product.path} alt="" /> 
                 </div>
                 <div className='flex-grow flex flex-row items-center justify-between px-3'>
                     <div>

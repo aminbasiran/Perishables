@@ -33,20 +33,27 @@ export const getProducts = async (req,res) => {
 export const createProduct = async (req,res) => {
     const {item,description,expiryDate} = req.body
     const {uid} = req.user
-    console.log(req.file)
+    const {path} = req.file
 
     try {
+
         if(!item){
             throw new Error("No item provided")
         }
+
         if(!description){
             throw new Error("No description provided")
         }
+
         if(!expiryDate){
             throw new Error("No date provided")
         }
 
-        const createdProduct = await createProductServices(item,description,expiryDate,uid)
+        if(!path){
+            throw new Error("No path provided")
+        }
+
+        const createdProduct = await createProductServices(item,description,expiryDate,uid,path)
         res.status(201).send({
             status: "Successfull",
             data : {

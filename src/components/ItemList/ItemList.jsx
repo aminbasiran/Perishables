@@ -34,9 +34,9 @@ export const ItemList = ({products,handleDeleteProduct,handleCreateProduct}) => 
     }
 
     return (
-        <div className='flex flex-col gap-3'>
-            <h1 className='text-left text-2xl font-bold'>All products ({products.length})</h1>
-            <button className="btn bg-black text-white" onClick={()=>document.getElementById('my_modal_2').showModal()}>+ Add</button>
+        <div className='w-full h-full flex flex-col gap-2 '>
+            <h1 className='text-left text-lg font-bold'>All products ({products.length})</h1>
+            <button className="btn bg-black text-white text-sm" onClick={()=>document.getElementById('my_modal_2').showModal()}>+ Add</button>
             <dialog id="my_modal_2" className="modal">
             <div className="modal-box">
                 <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
@@ -51,10 +51,13 @@ export const ItemList = ({products,handleDeleteProduct,handleCreateProduct}) => 
                 <button></button>
             </form>
             </dialog>
-            <div className='flex flex-col gap-3'>
-                {products.length === 0 && <div className='text-xl text-zinc-400 font-semibold border-2 border-zinc-300 rounded-md py-4 flex gap-4 justify-center items-center' >
-                                                <CgUnavailable size={28}/>
-                                                <h1>Empty list</h1>
+            <div className='flex flex-col gap-3 h-[350px] overflow-y-scroll'>
+                {products.length === 0 && <div className='p-4 flex flex-col gap-1 justify-center items-center' >
+                                                <div className='flex items-center gap-2'>
+                                                    <CgUnavailable size={28}/>
+                                                    <h1 className='text-md font-bold'>Your inventory is empty!</h1>
+                                                </div>
+                                                <h1 className='font-semibold text-xs text-zinc-500'>You don't have any inventory right now. Add yours now!</h1>
                                             </div>}
                 {products.map((product,index)=>{
                     return <Item key={index} product={product} handleDeleteProduct={handleDeleteProduct} />

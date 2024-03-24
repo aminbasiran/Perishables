@@ -39,6 +39,8 @@ const Login = () => {
     <div className='w-full h-screen grid place-items-center'>
       <div>
         <Link to="/home">HOME</Link>
+        <br />
+        <Link to="/dashboard">DASHBOARD</Link>
         <h1 className='text-4xl font-bold mb-11'>Login</h1>
         <form className=' flex flex-col gap-3' onSubmit={handleLogin}>
           <div className='flex flex-col gap-1 place-items-start justify-center'>
@@ -52,6 +54,7 @@ const Login = () => {
           <Button variant="primary" type="submit">Login</Button>
         </form>
         <h1 className='text-xs mt-10'>Dont't have an account? <Link to="/register"><span className='font-bold'>Register here</span></Link></h1>
+        <Link to="/landing"><h1 className='text-xs'>Go back</h1></Link>
       </div>
     </div>
   )

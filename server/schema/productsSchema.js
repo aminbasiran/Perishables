@@ -5,6 +5,7 @@ const productSchema = mongoose.Schema({
     item: {type:String,required:true}, 
     description: {type:String,required:true},
     expiryDate: {type:Date,required:true},
+    path: {type:String,required:true},
 },{timestamps:true})
 
 

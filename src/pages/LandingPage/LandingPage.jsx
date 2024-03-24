@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const LandingPage = () => {
   return (
-    <div className='w-full h-screen grid place-items-center'>
+    <div className='w-full h-screen grid place-items-center '>
         
         <main className='flex flex-col gap-4'>
             <div>
