@@ -3,7 +3,9 @@ import cors from "cors"
 import { globalRoutes } from "./routes/globalRoutes.js";
 import dotenv from "dotenv"
 import connectDB from "./config/mongooseConfig.js";
-import { checkIfAuthenticated } from "./middlewares/RequireAuth.js";
+
+
+
 
 
 dotenv.config()
@@ -17,6 +19,10 @@ app.use(express.json())
 app.get("/test", (req,res)=>{
     res.send("works")
 })
+
+// app.post("/multer", upload.single("file"), (req,res)=>{
+//     res.send(req.file)
+// })
 
 app.use("/api/v1",globalRoutes)
 

@@ -12,11 +12,13 @@ export const ItemList = ({products,handleDeleteProduct,handleCreateProduct}) => 
     const description = useInput("")
     const expiryDate = useInput("")
 
+    const file = useInput(null)
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
         try {
-            handleCreateProduct(item.value,description.value,expiryDate.value)
+            handleCreateProduct(item.value,description.value,expiryDate.value,file.value)
         } 
         
         catch (error) {
@@ -41,6 +43,7 @@ export const ItemList = ({products,handleDeleteProduct,handleCreateProduct}) => 
                     <input className="p-2 bg-transparent border-2  text-white border-zinc-600 rounded-md" type="text" value={item.value} onChange={item.handleChange}/>
                     <input className="p-2 bg-transparent border-2  text-white border-zinc-600 rounded-md" type="text" value={description.value} onChange={description.handleChange}/>
                     <input className="p-2 bg-transparent border-2 text-white border-zinc-600 rounded-md" type="date" value={expiryDate.value} onChange={expiryDate.handleChange}/>
+                    <input className="p-2 bg-transparent border-2 text-white border-zinc-600 rounded-md" type="file" name="file" onChange={file.handleFile}/>
                     <Button type="submit" classname="text-sm p-4" variant="primary">Confirm</Button>
                 </form>
             </div>

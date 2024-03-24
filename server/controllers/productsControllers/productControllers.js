@@ -33,6 +33,7 @@ export const getProducts = async (req,res) => {
 export const createProduct = async (req,res) => {
     const {item,description,expiryDate} = req.body
     const {uid} = req.user
+    console.log(req.file)
 
     try {
         if(!item){
