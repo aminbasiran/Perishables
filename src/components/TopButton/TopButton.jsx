@@ -1,33 +1,31 @@
 import React from 'react'
-import { CiSettings } from "react-icons/ci";
 import { useOutletContext } from 'react-router-dom';
-import { Button } from '../index';
-import { signOut } from "firebase/auth";
-import { auth } from '../../config/firebaseConfig';
-
+import { CgMenuGridO } from "react-icons/cg";
+import { BsMoonStarsFill } from "react-icons/bs"
 
 export const TopButton = () => {
 
-  const {openModal}= useOutletContext()
+  const {handleLogoutFromFirebase,user} = useOutletContext()
 
-  const handleSignOut = async() => {
-    try {
-        await signOut(auth)
-        setUser(null)
-        
-    } catch (error) {
-        console.log(error)
-    }
-}
-  
   return (
     <div className='flex flex-row gap-3 justify-between place-items-center'>
-      <div className='mr-auto'>
-        <CiSettings size={20}/>
+      <div className=''>
+        <BsMoonStarsFill size={20}/>
       </div>
-      <h1 onClick={handleSignOut} className='text-xs font-bold cursor-pointer'>Logout</h1>
-      <Button variant="green" onclick={openModal}>+ Add</Button>
-      {/* <div className='py-1 px-2 text-xs text-white font-semibold cursor-pointer bg-green-500 rounded-md' onClick={openModal}> + Add</div> */}
+      <div className='flex flex-row items-center'>
+        <h1 className='text-sm font-bold cursor-pointer'>{user.displayName}</h1>
+        <details className="dropdown dropdown-bottom dropdown-end">
+            <summary className="m-1 btn bg-black"><CgMenuGridO className='text-white'/></summary>
+            <ul className="p-2 flex flex-col gap-2 items-start shadow menu dropdown-content z-[100] bg-base-100 rounded-box w-24">
+              <li onClick={handleLogoutFromFirebase} className='text-white cursor-pointer p-2'>
+                Log out
+              </li>
+              <li  className='text-white cursor-pointer p-2'>
+                Setting
+              </li>
+            </ul>
+        </details>
+      </div>
     </div>
   )
 }

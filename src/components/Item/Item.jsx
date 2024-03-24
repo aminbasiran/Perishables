@@ -1,47 +1,37 @@
 import React from 'react'
-import { FaRegTrashAlt } from "react-icons/fa";
+import { HiDotsVertical } from "react-icons/hi";
+import { GiTrashCan } from "react-icons/gi";
+import { MdModeEdit } from "react-icons/md";
 import axios from 'axios';
 import { auth } from '../../config/firebaseConfig';
 
 
 export const Item = ({product,handleDeleteProduct}) => {
 
-    const handleDelete = async(id) => {
-
-        
-        try {
-            const url = `http://localhost:3000/api/v1/products/delete/${id}`;
-            const token = await auth.currentUser.getIdToken()
-            
-            if(!token){
-                throw new Error("No auth token")
-            }
-
-            const response = await axios.delete(url,{headers:  
-                {authorization: `Bearer ${token}` }})
-                
-            // console.log(response.data.data.response._id)
-            handleDeleteProduct(response.data.data.response._id)
-        } 
-        
-        
-        catch (error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode)
-            console.log(errorMessage)
-        }
-
-    }
+    
 
     return (
-        <div className='w-full aspect-square rounded-md bg-gradient-to-br from-indigo-300 to-indigo-500 drop-shadow-lg flex flex-col place-items-start p-2'>
-            <div className='text-left text-white  text-xs mb-auto'>{product.item}</div>
-            <div className="cursor-pointer" onClick={()=>handleDelete(product._id)}>
-                <FaRegTrashAlt />
+            <div className='rounded-md bg-black drop-shadow-lg flex flex-row p-2 gap-2 h-20'>
+                <div className='bg-white w-16 rounded-md'>
+                    
+                </div>
+                <div className='flex-grow flex flex-row items-center justify-between px-3'>
+                    <div>
+                        <div className='text-left text-lg text-white'>{product.item}</div>
+                        <div className='text-left text-md text-white '>{product.expiryDate}</div>
+                    </div>
+                    <details className="dropdown dropdown-top dropdown-end">
+                        <summary className="m-1 btn bg-black"><HiDotsVertical className='text-white'/></summary>
+                        <ul className="p-2 flex flex-col items-start gap-2 shadow menu dropdown-content z-50 bg-base-100 rounded-box w-24">
+                            <li onClick={()=>handleDeleteProduct(product._id)} className='text-white cursor-pointer p-2'>
+                                Delete
+                            </li>
+                            <li  className='text-white cursor-pointer p-2'>
+                                Edit
+                            </li>
+                        </ul>
+                    </details>
+                </div>
             </div>
-            <div className='text-left text-white text-xs '>{product.description}</div>
-            <div className='text-left text-white text-xs '>{product.expiryDate}</div>
-        </div>
     )
 }

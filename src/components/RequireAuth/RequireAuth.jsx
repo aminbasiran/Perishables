@@ -1,13 +1,14 @@
 import React from 'react'
-import { Navigate,useOutletContext } from 'react-router-dom'
+import { Navigate, useOutletContext } from 'react-router-dom'
 
 export const RequireAuth = ({children}) => {
 
-    const {currentUser} = useOutletContext()
-    
+    const {user} = useOutletContext()
+
+
     return (
         <div>
-            {currentUser !== null ? children : <Navigate to="/login"/>}
+            {user !== null ? children : <Navigate to="/login"/>}
         </div>
     )
 }
